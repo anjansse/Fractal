@@ -6,13 +6,13 @@
 #    By: anjansse <anjansse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:57:22 by anjansse          #+#    #+#              #
-#    Updated: 2019/09/05 23:24:37 by anjansse         ###   ########.fr        #
+#    Updated: 2019/09/06 11:00:23 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 	fractol
 
-GENERAL		= 	fractal.c julia.c mandel.c graphic.c extra.c
+GENERAL		= 	fractal.c julia.c mandel.c graphic.c cmd.c extra.c
 
 SRCS		=	$(addprefix src/, $(GENERAL))
 

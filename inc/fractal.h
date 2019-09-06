@@ -5,9 +5,23 @@
 # include "../Minilibx/minilibx_macos/mlx.h"
 # include   <math.h>
 
+/*
+** @CMD -> number of Fractol available for dispatch table.
+** @SH 	-> Screen Heigth.
+** @SW 	-> Screen Width.
+*/
+
 # define    CMD     2
 # define	SH		800
 # define	SW		1500
+
+/*
+** List of keys macros.
+*/
+
+# define 	ESC		53
+# define 	ZOOM_IN	4
+# define	ZOOM_OU	5
 
 typedef struct		s_julia
 {
@@ -31,8 +45,13 @@ typedef struct		s_dis {
 }					t_dis;
 
 void            send_error(char *error);
+void			quit_program(t_fractal *fractal);
 
 void			graphic_init(t_fractal *fractal);
+int				key_press(int key, void	*param);
+int				mouse_press(int button, int x, int y, void *param);
+int				mouse_release(int button, int x, int y, void *param);
+int				mouse_move(int x, int y, void *param);
 
 void            fractal_julia(t_fractal *fractal);
 
