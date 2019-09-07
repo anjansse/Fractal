@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mandel.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjansse <anjansse@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/07 01:19:29 by anjansse          #+#    #+#             */
+/*   Updated: 2019/09/07 01:24:58 by anjansse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractal.h"
 
 static void			init_mandel(t_fractal *fractal)
@@ -8,7 +20,7 @@ static void			init_mandel(t_fractal *fractal)
 	OLDIM = 0.0;
 }
 
-static void			fractal_real_imaginary_loop(t_fractal *fractal, int x, int y, int i)
+static void			fractal_loop(t_fractal *fractal, int x, int y, int i)
 {
 	while (NEWRE * NEWRE + NEWIM * NEWIM < 4 && i > 1)
 	{
@@ -21,43 +33,42 @@ static void			fractal_real_imaginary_loop(t_fractal *fractal, int x, int y, int 
 	}
 }
 
-static int     fractal_display_mandel(t_fractal *fractal)
+static int			fractal_display_mandel(t_fractal *fractal)
 {
-	int			maxIter;
+	int			max_iter;
 	int			i;
 	int			x;
 	int			y;
 
 	y = 0;
-	maxIter = 255;
+	max_iter = 255;
 	while (y < SH)
 	{
 		x = 0;
 		while (x < SW)
 		{
-			CR = 1.5 * (x - SW/2) / (0.5 * ZOOM * SW) + MOVEX;
-			CI = 1.0 * (y - SH/2) / (0.5 * ZOOM * SH) + MOVEY;
-			i = maxIter;
+			CR = 1.5 * (x - SW / 2) / (0.5 * ZOOM * SW) + MOVEX;
+			CI = 1.0 * (y - SH / 2) / (0.5 * ZOOM * SH) + MOVEY;
+			i = max_iter;
 			init_mandel(fractal);
-			fractal_real_imaginary_loop(fractal, x, y, i);
+			fractal_loop(fractal, x, y, i);
 			++x;
 		}
 		++y;
 	}
-	mlx_put_image_to_window(fractal->mlx, fractal->win, fractal->ptr_img, 0, 0);
+	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	return (0);
 }
 
-void            fractal_mandel(t_fractal *fractal)
+void				fractal_mandel(t_fractal *fractal)
 {
 	MOVEX = -0.5;
 	MOVEY = 0.0;
 	ZOOM = 1;
 	init_mandel(fractal);
-	mlx_hook(fractal->win, 2, 0, key_press, fractal);
-	mlx_hook(fractal->win, 4, 0, mouse_press, fractal);
-	mlx_hook(fractal->win, 5, 0, mouse_release, fractal);
-	mlx_hook(fractal->win, 6, 0, mouse_move, fractal);
-	mlx_loop_hook(fractal->mlx, fractal_display_mandel, fractal);
-	mlx_loop(fractal->mlx);
+	mlx_hook(WIN, 2, 0, key_press, fractal);
+	mlx_hook(WIN, 4, 0, mouse_press, fractal);
+	mlx_hook(WIN, 6, 0, mouse_move, fractal);
+	mlx_loop_hook(MLX, fractal_display_mandel, fractal);
+	mlx_loop(MLX);
 }

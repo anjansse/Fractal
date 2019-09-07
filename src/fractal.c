@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/07 01:13:28 by anjansse          #+#    #+#             */
+/*   Updated: 2019/09/07 01:21:45 by anjansse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractal.h"
 
-t_dis       g_dis_table[CMD] = {
+t_dis		g_dis_table[CMD] = {
 	{"julia", &fractal_julia},
 	{"mandel", &fractal_mandel},
 	{"tricorn", &fractal_tricorn},
@@ -20,7 +32,8 @@ void		dispatcher(char **av, t_fractal *fractal)
 		}
 		++i;
 	}
-	send_error("Error: Invalid fractal name");
+	send_error("Error: Invalid fractal name\n\nusage: ./fractol \
+			<julia/mandel/tricorn>\n");
 }
 
 void		fractal(char **av)
@@ -29,20 +42,15 @@ void		fractal(char **av)
 
 	graphic_init(&fractal);
 	dispatcher(++av, &fractal);
-	/*
-	** Implement Mouse press, move and release then start going deeper with Julia.
-	*/
-	// mlx_hook(fractal.win, 2, 0, mouse_press, &game);
-	// mlx_hook(fractal.win, 3, 0, mouse_release, &game);
-	// mlx_loop_hook(game.mlx, display_map, &game);
 	mlx_put_image_to_window(fractal.mlx, fractal.win, fractal.ptr_img, 0, 0);
 	mlx_loop(fractal.mlx);
 }
 
-int         main(int ac, char *av[])
+int			main(int ac, char *av[])
 {
 	if (ac != 2)
-		send_error("Error: Invalid number of parameters\n\nusage: ./fractol <julia/mandel/wtf>\n");
+		send_error("Error: Invalid number of parameters\n\nusage: ./fractol \
+				<julia/mandel/tricorn>\n");
 	fractal(av);
 	return (0);
 }
