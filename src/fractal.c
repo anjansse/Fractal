@@ -3,6 +3,7 @@
 t_dis       g_dis_table[CMD] = {
 	{"julia", &fractal_julia},
 	{"mandel", &fractal_mandel},
+	{"tricorn", &fractal_tricorn},
 };
 
 void		dispatcher(char **av, t_fractal *fractal)

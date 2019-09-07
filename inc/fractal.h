@@ -11,7 +11,7 @@
 ** @SW 	-> Screen Width.
 */
 
-# define    CMD     2
+# define    CMD     3
 # define	SH		400
 # define	SW		700
 
@@ -22,6 +22,20 @@
 # define 	ESC		53
 # define 	ZOOM_IN	4
 # define	ZOOM_OU	5
+
+/*
+** List of macros to make the algos easier to read.
+*/
+
+# define 	NEWRE	fractal->julia.zx
+# define 	NEWIM	fractal->julia.zy
+# define	OLDRE	fractal->julia.tmpzx
+# define	OLDIM	fractal->julia.tmpzy
+# define	CR		fractal->julia.cx
+# define	CI		fractal->julia.cy
+# define 	ZOOM	fractal->julia.zoom
+# define 	MOVEX	fractal->julia.moveX
+# define	MOVEY	fractal->julia.moveY
 
 typedef struct		s_julia
 {
@@ -62,7 +76,7 @@ int				mouse_release(int button, int x, int y, void *param);
 int				mouse_move(int x, int y, void *param);
 
 void            fractal_julia(t_fractal *fractal);
-
+void            fractal_tricorn(t_fractal *fractal);
 void            fractal_mandel(t_fractal *fractal);
 
 #endif

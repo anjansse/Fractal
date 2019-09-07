@@ -2,21 +2,21 @@
 
 static void			init_julia(t_fractal *fractal)
 {
-	fractal->julia.moveX = 0.0;
-	fractal->julia.moveY = 0.0;
-	fractal->julia.cx = -0.7;
-	fractal->julia.cy = 0.27015;
-	fractal->julia.zoom = 1;
+	MOVEX = 0.0;
+	MOVEY = 0.0;
+	CR = -0.7;
+	CI = 0.27015;
+	ZOOM = 1;
 }
 
 static void			fractal_real_imaginary_loop(t_fractal *fractal, int x, int y, int i)
 {
-	while (fractal->julia.zx * fractal->julia.zx + fractal->julia.zy * fractal->julia.zy < 4 && i > 1)
+	while (NEWRE * NEWRE + NEWIM * NEWIM < 4 && i > 1)
 	{
-		fractal->julia.tmpzx = fractal->julia.zx;
-		fractal->julia.tmpzy = fractal->julia.zy;
-		fractal->julia.zx = fractal->julia.tmpzx * fractal->julia.tmpzx - fractal->julia.tmpzy * fractal->julia.tmpzy + fractal->julia.cx;
-		fractal->julia.zy = 2 * fractal->julia.tmpzx * fractal->julia.tmpzy + fractal->julia.cy;
+		OLDRE = NEWRE;
+		OLDIM = NEWIM;
+		NEWRE = OLDRE * OLDRE - OLDIM * OLDIM + CR;
+		NEWIM = 2 * OLDRE * OLDIM + CI;
 		--i;
 		fractal->img[y * SW + x] = (i << 21) + (i << 10) + i * 8;
 	}
@@ -36,8 +36,8 @@ static int			fractal_display_julia(t_fractal *fractal)
 		x = 0;
 		while (x < SW)
 		{
-			fractal->julia.zx = 1.5 * (x - SW/2) / (0.5 * fractal->julia.zoom * SW) + fractal->julia.moveX;
-			fractal->julia.zy = 1.0 * (y - SH/2) / (0.5 * fractal->julia.zoom * SH) + fractal->julia.moveY;
+			NEWRE = 1.5 * (x - SW/2) / (0.5 * ZOOM * SW) + MOVEX;
+			NEWIM = 1.0 * (y - SH/2) / (0.5 * ZOOM * SH) + MOVEY;
 			i = maxIter;
 			fractal_real_imaginary_loop(fractal, x, y, i);
 			++x;
