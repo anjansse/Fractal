@@ -12,8 +12,8 @@
 */
 
 # define    CMD     2
-# define	SH		800
-# define	SW		1500
+# define	SH		400
+# define	SW		700
 
 /*
 ** List of keys macros.
@@ -26,6 +26,14 @@
 typedef struct		s_julia
 {
 	int				zoom;
+	double			zx;
+	double			zy;
+	double			cx;
+	double			cy;
+	double			moveX;
+	double			moveY;
+	double			tmpzx;
+	double			tmpzy;
 }					t_julia;
 
 typedef struct		s_fractal
