@@ -6,7 +6,7 @@
 /*   By: anjansse <anjansse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 01:22:49 by anjansse          #+#    #+#             */
-/*   Updated: 2019/09/07 01:23:44 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/09/07 12:08:36 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int			fractal_display_julia(t_fractal *fractal)
 			NEWRE = 1.5 * (x - SW / 2) / (0.5 * ZOOM * SW) + MOVEX;
 			NEWIM = 1.0 * (y - SH / 2) / (0.5 * ZOOM * SH) + MOVEY;
 			i = max_iter;
-			fractal_real_imaginary_loop(fractal, x, y, i);
+			fractal_loop(fractal, x, y, i);
 			++x;
 		}
 		++y;

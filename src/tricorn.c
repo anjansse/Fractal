@@ -6,7 +6,7 @@
 /*   By: anjansse <anjansse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 01:19:43 by anjansse          #+#    #+#             */
-/*   Updated: 2019/09/07 01:25:36 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/09/07 12:08:53 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int			fractal_display_tricorn(t_fractal *fractal)
 			CI = 1.0 * (y - SH / 2) / (0.5 * ZOOM * SH) + MOVEY;
 			i = max_iter;
 			init_tricorn(fractal);
-			fractal_real_imaginary_loop(fractal, x, y, i);
+			fractal_loop(fractal, x, y, i);
 			++x;
 		}
 		++y;
